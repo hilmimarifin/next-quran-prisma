@@ -21,6 +21,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
+    "daisyui": "^4.7.3",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "postcss": "latest",

@@ -46,6 +46,7 @@ model User {
   role          String?
   accounts      Account[]
   sessions      Session[]
+  bookmarks     Bookmark[]
 }
 
 model VerificationToken {
@@ -54,4 +55,13 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Bookmark {
+  id            String    @id @default(cuid())
+  name          String
+  surat         Int
+  ayat          Int
+  userId        String 
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

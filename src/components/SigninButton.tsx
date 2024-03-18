@@ -8,17 +8,31 @@ const SigninButton = () => {
   if (session && session.user) {
     return (
       <div className="flex gap-4 ml-auto items-center">
-        <p className="text-sky-600">{session.user.name}</p>
-        <Image
-          src={session.user.image ?? ""}
-          alt={session.user.name ?? ""}
-          className=" rounded-full"
-          width={32}
-          height={32}
-        />
-        <button onClick={() => signOut()} className="text-red-600">
-          Sign Out
-        </button>
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 rounded-full">
+              <Image
+                src={session.user.image ?? ""}
+                alt={session.user.name ?? ""}
+                className=" rounded-full"
+                width={32}
+                height={32}
+              />
+            </div>
+          </div>
+          <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+            <li className="border-b">
+              <p className="text-sky-600">{session.user.name}</p>
+            </li>
+            <li><a>Settings</a></li>
+            <li>
+              <button onClick={() => signOut()} className="text-red-600">
+                Sign Out
+              </button>
+            </li>
+          </ul>
+        </div>
+
       </div>
     );
   }

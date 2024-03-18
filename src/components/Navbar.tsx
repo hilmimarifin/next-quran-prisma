@@ -1,13 +1,16 @@
 import Link from "next/link"
 import SigninButton from "./SigninButton"
-import { getBookmarks } from "@/services/bookmark/getData"
 import { bookmark } from "@/types/bookmark"
 import ListBookmark from "./ListBookmark"
 import { getListSurat } from "@/services/quran"
+import { getBookmarks } from "@/app/api/bookmarks/services"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 
 const Navbar = async({ className }: { className?: string }) => {
-    const bookmarks = await getBookmarks()
-    const listSurat = await getListSurat()
+    const session = await getServerSession(authOptions)
+    const bookmarks = await getBookmarks({userId : session?.user.id as string})
+    const listSurat = await getListSurat()    
     return (
         <section className={`${className}`}>
             <div className="navbar bg-base-100">

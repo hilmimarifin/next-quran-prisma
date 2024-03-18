@@ -7,12 +7,12 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 
 
-const ListBookmark = ({ bookmarks, listSurat, className }: { bookmarks: bookmarksResponse, listSurat: surat[], className?: string }) => {
+const ListBookmark = ({ bookmarks, listSurat, className }: { bookmarks: bookmark[], listSurat: surat[], className?: string }) => {
   const router = useRouter()
   return (
     <ul tabIndex={0} className={`${className}`}>
       {
-        bookmarks.data.map((bookmark: bookmark) => {
+        bookmarks.map((bookmark: bookmark) => {
           return (
             <li key={bookmark.id} onClick={()=>router.push(`/surat/${bookmark.surat}#${bookmark.ayat}`)}>
               <div className='flex flex-row justify-between'>

@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma"
+import { bookmark, bookmarksResponse } from "@/types/bookmark";
 
 export const createBookmark = async ({ name, ayat, surat, userId }: { name: string, ayat: number, surat: number, userId: string }) => {
     try {
@@ -14,12 +15,12 @@ export const createBookmark = async ({ name, ayat, surat, userId }: { name: stri
     }
 }
 
-export const getBookmarks = async ({ userId }: { userId: string }) => {
+export const getBookmarks = async ({ userId }: { userId: string }) : Promise<bookmark[]> => {
     try {        
         const res = await prisma.bookmark.findMany({where: {userId : userId}})
         return res
-    } catch (error) {
-        console.error(error)
+    } catch (error: any) {
+        throw new Error(error.message)
     }
 
 }

@@ -7,10 +7,9 @@ import { surat } from "@/types/quran"
 import { useParams, useRouter } from "next/navigation"
 import { useEffect } from "react"
 
-const Modal = ({ bookmarks, listSurat }: { bookmarks: bookmarksResponse, listSurat: surat[] }) => {
+const Modal = ({ bookmarks, listSurat }: { bookmarks: bookmark[], listSurat: surat[] }) => {
     const router = useRouter()
     const params = useParams()
-    const { data: listBookmark } = bookmarks
     useEffect(() => {
         (document?.getElementById('select_modal') as HTMLFormElement).showModal()
     }, [])
@@ -28,7 +27,7 @@ const Modal = ({ bookmarks, listSurat }: { bookmarks: bookmarksResponse, listSur
                 <button className="btn btn-block bg-gray-600 text-white" onClick={() => router.replace(`/surat/${params.number_of_surah}/${params.ayat}/add`, { scroll: false })}>+ Add new bookmark</button>
                 <ul>
                     {
-                        listBookmark.map((bookmmark: bookmark) => {
+                        bookmarks.map((bookmmark: bookmark) => {
                             return (
                                 <li key={bookmmark.id} className="mt-1">
                                     <button className="btn btn-block flex flex-row justify-between" onClick={()=>handleBookmarkClick(bookmmark)}>

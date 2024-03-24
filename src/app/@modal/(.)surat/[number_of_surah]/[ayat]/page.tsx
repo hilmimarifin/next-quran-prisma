@@ -1,15 +1,11 @@
-import React from 'react'
-import Modal from './Modal'
+import { getBookmarks } from '@/services/bookmark/getData';
 import { getListSurat } from '@/services/quran';
-import { revalidateTag } from 'next/cache';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { getBookmarks } from '@/app/api/bookmarks/services';
+import Modal from './Modal';
+import {headers} from 'next/headers'
 
 
 const page = async () => {
-    const session = await getServerSession(authOptions)
-    const bookmarks = await getBookmarks({userId: session?.user.id as string});
+    const bookmarks = await getBookmarks({headers: headers});
     const listSurat = await getListSurat();
     return (
             <Modal bookmarks={bookmarks} listSurat={listSurat}/>
